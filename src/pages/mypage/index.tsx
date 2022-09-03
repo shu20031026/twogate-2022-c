@@ -13,6 +13,7 @@ const MyPage: NextPage = () => {
     if (!(authData && githubCredential)) {
       router.replace('/')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
