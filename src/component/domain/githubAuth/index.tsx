@@ -3,12 +3,14 @@ import { firebaseAuth, githubProvider } from '~/infra/firebase'
 import { authButton } from './style'
 import { useRecoilState } from 'recoil'
 import { authState, githubCredentialState } from '~/context/atoms'
+import { useRouter } from 'next/router'
 
 export const GithubAuth = () => {
   const [authData, setAuthData] = useRecoilState(authState)
   const [githubCredential, setGithubCredential] = useRecoilState(
     githubCredentialState
   )
+  const router = useRouter()
 
   const signInApp = async () => {
     try {
@@ -19,6 +21,7 @@ export const GithubAuth = () => {
         userImage: res.user.photoURL,
       })
       setGithubCredential(credential?.accessToken)
+      router.replace('/mypage')
     } catch (err) {
       console.error(err)
     }
@@ -30,6 +33,7 @@ export const GithubAuth = () => {
       setAuthData(undefined)
       setGithubCredential(undefined)
       console.info(res)
+      router.replace('/')
     } catch (err) {
       console.error(err)
     }
