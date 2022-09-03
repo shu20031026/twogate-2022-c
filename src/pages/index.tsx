@@ -1,12 +1,7 @@
 import type { NextPage } from 'next'
-import { css } from '@emotion/react'
-
-const hoge = css`
-  color: red;
-`
-
+// homeページ
 const Home: NextPage = () => {
-  return <div css={hoge}>hoge</div>
+  return <div>homeページ</div>
 }
 
 export default Home
