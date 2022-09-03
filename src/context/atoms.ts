@@ -1,8 +1,16 @@
 import { atom } from 'recoil'
 
-export const authState = atom({
+export type authDataType = {
+  uid: string | null
+  userImage: string | null
+}
+
+export const authState = atom<authDataType | undefined>({
   key: 'authState',
-  default: {
-    isLogin: false,
-  },
+  default: undefined,
+})
+
+export const githubCredentialState = atom<string | undefined>({
+  key: 'githubCredentialState',
+  default: undefined,
 })
