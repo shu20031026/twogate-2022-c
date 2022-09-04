@@ -1,6 +1,10 @@
 import type { NextPage } from 'next'
 import { GithubAuth } from '~/component/domain/githubAuth'
-import { fetchUserCollections, fetchUserData } from '~/utils/firestore'
+import {
+  fetchExchangeCardList,
+  fetchMyCardList,
+  fetchUserCollections,
+} from '~/utils/firestore'
 // homeページ
 const Home: NextPage = () => {
   return (
@@ -8,7 +12,7 @@ const Home: NextPage = () => {
       <div>
         <GithubAuth />
       </div>
-      <div onClick={fetchUserCollections}>
+      <div onClick={() => fetchExchangeCardList('user_test')}>
         <p>fetch</p>
       </div>
       <div>home</div>
