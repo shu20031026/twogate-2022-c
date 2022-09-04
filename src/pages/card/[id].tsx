@@ -5,23 +5,81 @@ import { useEffect } from 'react'
 import { fetchCardData, updateExchangeCardList } from '../../utils/firestore'
 import { CardModel } from '~/models/card'
 import QRcode from 'qrcode.react'
-import {
-  CardContainer,
-  creatorNameStyle,
-  qrcodeWrapper,
-  saveButton,
-  serviceNameStyle,
-  tagStyle1,
-  tagStyle2,
-  tagWrapper,
-  urlButton,
-  urlWrapper,
-} from './style'
 import { useRecoilState } from 'recoil'
 import { authState, githubCredentialState } from '~/context/atoms'
 import { firebaseAuth, githubProvider } from '~/infra/firebase'
 import { GithubAuthProvider, signInWithPopup } from 'firebase/auth'
-// 名刺ページ
+import { css } from '@emotion/react'
+
+const CardContainer = css`
+  width: 100%;
+  text-align: center;
+  padding: 0 40px 0 40px;
+`
+
+const qrcodeWrapper = css`
+  margin: 20px;
+`
+
+const serviceNameStyle = css`
+  color: #00b9aa;
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 10px;
+`
+
+const tagWrapper = css`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+`
+
+const tagStyle1 = css`
+  background-color: #00b9aa;
+  padding: 4px 10px 4px 10px;
+  color: white;
+`
+const tagStyle2 = css`
+  border: 1px solid #00b9aa;
+  padding: 4px 10px 4px 10px;
+  color: #00b9aa;
+`
+
+const creatorNameStyle = css`
+  font-size: 20px;
+  margin-bottom: 10px;
+`
+
+const urlWrapper = css`
+  text-align: center;
+`
+
+const urlButton = css`
+  width: fit-content;
+  padding: 10px;
+  border-radius: 3px;
+  background-color: #00b9aa;
+  color: white;
+  margin: 0 auto;
+  margin-bottom: 30px;
+`
+
+const overviewStyle = css`
+  width: 100%;
+`
+
+const saveButton = css`
+  position: absolute;
+  width: calc(100% - 80px);
+  bottom: 30px;
+  margin: 0 40px 0 40px;
+  border: 1px solid #00b9aa;
+  color: #00b9aa;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 2px;
+`
 
 interface CardProps {
   card: CardModel
@@ -44,7 +102,7 @@ const CardComponent = ({ card, cardId }: CardProps) => {
       <a href={card.serviceURL} css={urlWrapper}>
         <div css={urlButton}>{card.serviceURL}</div>
       </a>
-      <div>{card.overview}</div>
+      <div css={overviewStyle}>{card.overview}</div>
     </div>
   )
 }
