@@ -16,6 +16,7 @@ export const GithubAuth = () => {
     try {
       const res = await signInWithPopup(firebaseAuth, githubProvider) //ユーザー情報
       const credential = GithubAuthProvider.credentialFromResult(res) // GitHubアクセストークン等
+      console.log(res)
       setAuthData({
         uid: res.user.uid,
         userImage: res.user.photoURL,
