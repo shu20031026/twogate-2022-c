@@ -19,7 +19,7 @@ export const GithubAuth = () => {
       console.log(res)
       setAuthData({
         uid: res.user.uid,
-        userImage: res.user.photoURL,
+        userImage: res.user.photoURL ? res.user.photoURL : '',
       })
       setGithubCredential(credential?.accessToken)
       router.replace('/mypage')

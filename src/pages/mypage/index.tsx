@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import { GithubAuth } from '~/component/domain/githubAuth'
-import { authState, githubCredentialState } from '~/context/atoms'
+import { authState } from '~/context/atoms'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
@@ -12,6 +12,7 @@ import Container from '@mui/material/Container'
 import Form from '~/component/form'
 import Card from '~/component/card'
 import List from '~/component/card_list'
+import { loginUser } from '~/utils/firestore'
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -39,11 +40,13 @@ const TabPanel = (props: TabPanelProps) => {
 const MyPage: NextPage = () => {
   const [value, setValue] = useState(0)
   const authData = useRecoilValue(authState)
-  const githubCredential = useRecoilValue(githubCredentialState)
+  // const githubCredential = useRecoilValue(githubCredentialState)
   const router = useRouter()
 
   useEffect(() => {
-    if (!(authData && githubCredential)) {
+    if (authData !== undefined) {
+      loginUser(authData.uid)
+    } else {
       router.replace('/')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

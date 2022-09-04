@@ -1,8 +1,7 @@
-import * as React from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 
-export default function BasicTextFields() {
+const BasicTextFields = () => {
   return (
     <>
       <Box
@@ -13,20 +12,30 @@ export default function BasicTextFields() {
         noValidate
         autoComplete="off"
       >
-        <TextField id="outlined-basic" label="name" variant="outlined" />
+        <TextField id="outlined-basic" label="名前" variant="outlined" />
         <br />
-        <TextField id="outlined-basic" label="event" variant="outlined" />
-      </Box>
-      <Box
-        component="form"
-        sx={{
-          '& > :not(style)': { m: 1, width: '50ch' },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField id="outlined-basic" label="comment" variant="outlined" />
+        <TextField
+          id="outlined-basic"
+          label="イベントタグ"
+          variant="outlined"
+        />
+        <br />
+        <TextField id="outlined-basic" label="グループ名" variant="outlined" />
+        <br />
+        <TextField
+          id="outlined-basic"
+          label="プロダクトURL"
+          variant="outlined"
+        />
+        <br />
+        <TextField
+          id="outlined-basic"
+          label="プロダクトURL"
+          variant="outlined"
+        />
       </Box>
     </>
   )
 }
+
+export default BasicTextFields
