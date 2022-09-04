@@ -69,6 +69,16 @@ export const createCard = async (cardData: cardObject) => {
   return docRef.id
 }
 
+export const loginUser = async (uid: string) => {
+  const currentUserData = await fetchUserData(uid)
+  if (currentUserData === undefined) {
+    await setDoc(doc(firestore, 'user', uid), {
+      exchangeCards: [],
+      mycard: [],
+    })
+  }
+}
+
 export const updateMyCardList = async (uid: string, cardId: string) => {
   const currentUserData = await fetchUserData(uid)
   const docRef = doc(firestore, 'cards', cardId)

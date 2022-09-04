@@ -1,8 +1,8 @@
 import { atom } from 'recoil'
 
 export type authDataType = {
-  uid: string | null
-  userImage: string | null
+  uid: string
+  userImage: string
 }
 
 export const authState = atom<authDataType | undefined>({
