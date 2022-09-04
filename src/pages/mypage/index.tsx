@@ -9,7 +9,7 @@ import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 
-import Form from '~/component/form'
+import NewCard from '~/component/newCard'
 import Card from '~/component/card'
 import List from '~/component/card_list'
 import { loginUser } from '~/utils/firestore'
@@ -57,7 +57,6 @@ const MyPage: NextPage = () => {
   }
   return (
     <div>
-      <GithubAuth />
       <>
         <Container maxWidth="md">
           <Box sx={{ width: '100%' }}>
@@ -69,7 +68,7 @@ const MyPage: NextPage = () => {
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              <Form />
+              <NewCard />
             </TabPanel>
             <TabPanel value={value} index={1}>
               <Card />

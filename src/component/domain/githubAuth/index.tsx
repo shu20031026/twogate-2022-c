@@ -1,6 +1,6 @@
 import { GithubAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { firebaseAuth, githubProvider } from '~/infra/firebase'
-import { authButton } from './style'
+import { buttonContainer, buttonText, buttonWrapper } from './style'
 import { useRecoilState } from 'recoil'
 import { authState, githubCredentialState } from '~/context/atoms'
 import { useRouter } from 'next/router'
@@ -40,25 +40,17 @@ export const GithubAuth = () => {
     }
   }
 
-  const test = () => {
-    console.log(authData)
-    console.log(githubCredential)
-  }
-
   return (
-    <div>
+    <div css={buttonWrapper}>
       {authData && githubCredential ? (
-        <div onClick={signOutApp} css={authButton}>
-          <p>サインアウト</p>
+        <div onClick={signOutApp} css={buttonContainer}>
+          <p css={buttonText}>サインアウト</p>
         </div>
       ) : (
-        <div onClick={signInApp}>
-          <p>GitHubでログイン</p>
+        <div onClick={signInApp} css={buttonContainer}>
+          <p css={buttonText}>ログイン</p>
         </div>
       )}
-      <div onClick={test}>
-        <p>test</p>
-      </div>
     </div>
   )
 }

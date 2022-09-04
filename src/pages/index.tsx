@@ -5,12 +5,6 @@ import { fetchUserData } from '~/utils/firestore'
 const Home: NextPage = () => {
   return (
     <div>
-      <div>
-        <GithubAuth />
-      </div>
-      <div onClick={() => fetchUserData('user_2')}>
-        <p>ユーザー取得</p>
-      </div>
       <div>home</div>
     </div>
   )
