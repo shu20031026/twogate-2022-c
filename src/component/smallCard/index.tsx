@@ -19,7 +19,7 @@ import {
 // serviceName: "hogehogeあぷり"
 
 export const SmallCard = ({ cardId, name, serviceName }: any) => {
-  const url = `https://localhost:3000/card/${cardId}`
+  const url = `https://twogate-2022-c.web.app/card/${cardId}`
   return (
     <NextLink href={`/card/${cardId}`} passHref>
       <MuiLink css={smallCardContainer}>
