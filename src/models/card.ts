@@ -1,4 +1,4 @@
-export interface Card {
+export interface CardModel {
   eventTag: string
   groupTag: string
   name: string
