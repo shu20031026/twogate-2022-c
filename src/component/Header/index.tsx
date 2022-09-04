@@ -1,6 +1,8 @@
 import { GithubAuth } from '../domain/githubAuth'
 import { css } from '@emotion/react'
 import Link from 'next/link'
+import { useRecoilValue } from 'recoil'
+import { authState } from '~/context/atoms'
 
 const hederContainer = css`
   background-color: #00b9aa;
@@ -20,11 +22,18 @@ const appName = css`
 `
 
 const Header = () => {
+  const auth = useRecoilValue(authState)
   return (
     <div css={hederContainer}>
-      <Link href="/">
-        <h1 css={appName}>アプリ名</h1>
-      </Link>
+      {auth?.uid ? (
+        <Link href="/mypage">
+          <h1 css={appName}>HackCard</h1>
+        </Link>
+      ) : (
+        <Link href="/">
+          <h1 css={appName}>HackCard</h1>
+        </Link>
+      )}
       <GithubAuth />
     </div>
   )

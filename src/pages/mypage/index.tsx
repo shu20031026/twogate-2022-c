@@ -2,7 +2,6 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
-import { GithubAuth } from '~/component/domain/githubAuth'
 import { authState } from '~/context/atoms'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
@@ -10,9 +9,8 @@ import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 
 import NewCard from '~/component/newCard'
-import Card from '~/component/card'
-import List from '~/component/card_list'
 import { loginUser } from '~/utils/firestore'
+import { ExchangeCardList, MyCardList } from '~/component/cardList'
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -70,9 +68,11 @@ const MyPage: NextPage = () => {
             <TabPanel value={value} index={0}>
               <NewCard />
             </TabPanel>
-            <TabPanel value={value} index={1}></TabPanel>
+            <TabPanel value={value} index={1}>
+              <MyCardList />
+            </TabPanel>
             <TabPanel value={value} index={2}>
-              <List />
+              <ExchangeCardList />
             </TabPanel>
           </Box>
         </Container>

@@ -18,6 +18,7 @@ const NewCard = () => {
   const [repository, setRepository] = useState<string>('')
   const [overview, setOverview] = useState<string>('')
   const [serviceURL, setServiceURL] = useState<string>('')
+  const [serviceName, setServiceName] = useState<string>('')
 
   const createNewCard = async () => {
     console.log('create new card')
@@ -30,6 +31,7 @@ const NewCard = () => {
         overview,
         repository,
         serviceURL,
+        serviceName,
       },
       uid
     )
@@ -39,6 +41,7 @@ const NewCard = () => {
     setRepository('')
     setOverview('')
     setServiceURL('')
+    setServiceName('')
   }
 
   return (
@@ -65,6 +68,14 @@ const NewCard = () => {
           css={inputForm}
           onChange={(e) => setGroupTag(e.target.value)}
           value={groupTag}
+        />
+      </div>
+      <div css={inputFormWrapper}>
+        <input
+          placeholder="プロダクト名"
+          css={inputForm}
+          onChange={(e) => setServiceName(e.target.value)}
+          value={serviceName}
         />
       </div>
       <div css={inputFormWrapper}>
