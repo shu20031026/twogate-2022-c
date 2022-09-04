@@ -29,7 +29,7 @@ jobs:
         run: yarn
 
       - name: build test
-        run: yarn build
+        run: yarn && yarn build
 
       - name: Typecheck 👀
         run: yarn typecheck
