@@ -2,9 +2,10 @@ import { firestore } from '~/infra/firebase'
 import { addDoc, doc, getDoc, collection, setDoc } from 'firebase/firestore'
 
 export const fetchCardData = async (cardId: any) => {
-  const docRef = doc(firestore, 'cards', cardId)
+  const cardsCollection = collection(firestore, 'cards')
+  const cardDoc = doc(cardsCollection, cardId)
   try {
-    const getCard = await getDoc(docRef)
+    const getCard = await getDoc(cardDoc)
     return getCard.data()
   } catch (error) {
     console.error(error)
