@@ -1,4 +1,5 @@
 import QRCode from 'qrcode.react'
+import { useEffect } from 'react'
 
 import ImageList from '@mui/material/ImageList'
 import ImageListItem from '@mui/material/ImageListItem'
@@ -8,6 +9,12 @@ import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Unstable_Grid2'
 
+import { CardModel } from '~/models/card'
+
+interface CardProps {
+  card: CardModel
+}
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -16,7 +23,11 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 
-export default function Card() {
+export default function Card({ card }: CardProps) {
+  useEffect(() => {
+    console.log(card)
+  })
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -39,9 +50,12 @@ export default function Card() {
                 aria-labelledby="category-a"
                 sx={{ pl: 2, flex: 1, textAlign: 'left' }}
               >
-                <p>名前</p>
-                <p>イベント</p>
-                <p>一言</p>
+                <p>{card.eventTag}</p>
+                <p>{card.groupTag}</p>
+                <p>{card.name}</p>
+                <p>{card.overview}</p>
+                <p>{card.repository}</p>
+                <p>{card.serviceURL}</p>
               </Box>
             </Item>
           </Grid>

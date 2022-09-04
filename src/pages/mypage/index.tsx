@@ -68,9 +68,7 @@ const MyPage: NextPage = () => {
             <TabPanel value={value} index={0}>
               <Form />
             </TabPanel>
-            <TabPanel value={value} index={1}>
-              <Card />
-            </TabPanel>
+            <TabPanel value={value} index={1}></TabPanel>
             <TabPanel value={value} index={2}>
               <List />
             </TabPanel>
