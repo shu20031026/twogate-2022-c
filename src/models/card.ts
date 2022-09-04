@@ -5,4 +5,5 @@ export interface CardModel {
   overview: string
   repository: string
   serviceURL: string
+  serviceName: string
 }

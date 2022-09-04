@@ -28,7 +28,10 @@ export const fetchMyCardList = async (uid: string) => {
     const docSnap = await getDoc(docRef)
     const myCardList = docSnap.data()?.mycard.map(async (item: any) => {
       const cardDoc = await getDoc(item)
-      return cardDoc.data()
+      return {
+        cardId: cardDoc.id,
+        cardData: cardDoc.data(),
+      }
     })
     return await Promise.all(myCardList)
   } catch (error) {
@@ -42,8 +45,10 @@ export const fetchExchangeCardList = async (uid: string) => {
     const docSnap = await getDoc(docRef)
     const myCardList = docSnap.data()?.exchangeCards.map(async (item: any) => {
       const cardDoc = await getDoc(item.cardId)
+      console.log(cardDoc)
       const cardURL = item.picture
       return {
+        cardId: cardDoc.id,
         cardData: cardDoc.data(),
         picture: cardURL,
       }
@@ -61,6 +66,7 @@ export type cardObject = {
   overview: string
   repository: string
   serviceURL: string
+  serviceName: string
 }
 
 export const createCard = async (cardData: cardObject) => {
