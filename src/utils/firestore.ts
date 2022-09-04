@@ -1,37 +1,23 @@
 import { firestore } from '~/infra/firebase'
-import { doc, getDoc, collection, getDocs } from 'firebase/firestore'
+import { addDoc, doc, getDoc, collection, setDoc } from 'firebase/firestore'
 
-export const fetchUserData = async (collectionName: string) => {
-  const docRef = doc(firestore, 'user', collectionName)
+export const fetchCardData = async (cardId: any) => {
+  const docRef = doc(firestore, 'cards', cardId)
   try {
-    const docSnap = await getDoc(docRef)
-    console.info(docSnap.data())
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-export const fetchUserCollections = async () => {
-  try {
-    const querySnapshot = await getDocs(collection(firestore, 'user'))
-    querySnapshot.forEach(async (doc) => {
-      console.log(doc.id, ' => ', doc.data())
-      doc.data().mycard.forEach(async (item: any) => {
-        const cardData = await fetchCardData(item)
-        console.log(cardData)
-      })
-    })
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-export const fetchCardData = async (cardPath: any) => {
-  try {
-    const getCard = await getDoc(cardPath)
+    const getCard = await getDoc(docRef)
     return getCard.data()
   } catch (error) {
     console.error(error)
+  }
+}
+
+export const fetchUserData = async (uid: string) => {
+  const docRef = doc(firestore, 'user', uid)
+  try {
+    const getUser = await getDoc(docRef)
+    return getUser.data()
+  } catch (error) {
+    console.error
   }
 }
 
@@ -61,8 +47,53 @@ export const fetchExchangeCardList = async (uid: string) => {
         picture: cardURL,
       }
     })
-    console.log(await Promise.all(myCardList))
+    return await Promise.all(myCardList)
   } catch (error) {
     console.error(error)
   }
+}
+
+export type cardObject = {
+  eventTag: string
+  groupTag: string
+  name: string
+  overview: string
+  repository: string
+  serviceURL: string
+}
+
+export const createCard = async (cardData: cardObject) => {
+  const docRef = await addDoc(collection(firestore, 'cards'), cardData)
+  console.log(docRef.id)
+  return docRef.id
+}
+
+export const updateMyCardList = async (uid: string, cardId: string) => {
+  const currentUserData = await fetchUserData(uid)
+  const docRef = doc(firestore, 'cards', cardId)
+  currentUserData?.mycard.push(docRef)
+  await setDoc(doc(firestore, 'user', uid), currentUserData)
+}
+
+export const createMyCard = async (cardData: cardObject, uid: string) => {
+  const cardId = await createCard(cardData)
+  await updateMyCardList(uid, cardId)
+  return cardId
+}
+
+export type exchangeCardSet = {
+  cardId: string
+  picture: string
+}
+
+export const updateExchangeCardList = async (
+  uid: string,
+  cardId: string,
+  picture: string
+) => {
+  const currentUserData = await fetchUserData(uid)
+  console.log(currentUserData?.mycard)
+  const docRef = doc(firestore, 'cards', cardId)
+  currentUserData?.exchangeCards.push({ cardId: docRef, picture })
+  await setDoc(doc(firestore, 'user', uid), currentUserData)
 }

@@ -1,9 +1,10 @@
 import type { NextPage } from 'next'
 import { GithubAuth } from '~/component/domain/githubAuth'
 import {
-  fetchExchangeCardList,
-  fetchMyCardList,
-  fetchUserCollections,
+  createMyCard,
+  fetchCardData,
+  updateExchangeCardList,
+  updateMyCardList,
 } from '~/utils/firestore'
 // homeページ
 const Home: NextPage = () => {
@@ -12,8 +13,35 @@ const Home: NextPage = () => {
       <div>
         <GithubAuth />
       </div>
-      <div onClick={() => fetchExchangeCardList('user_test')}>
+      <div onClick={() => fetchCardData('cards_test')}>
         <p>fetch</p>
+      </div>
+      <div onClick={() => updateMyCardList('user_test', 'hoge')}>
+        <p>カード交換</p>
+      </div>
+      <div
+        onClick={() =>
+          createMyCard(
+            {
+              eventTag: 'いべんとたぐ2',
+              groupTag: 'ぐるーぷたぐ2',
+              name: 'なまえ2',
+              overview: 'せつめい2',
+              repository: 'りぽじとり2',
+              serviceURL: 'さーびすURL2',
+            },
+            'user_test'
+          )
+        }
+      >
+        <p>create</p>
+      </div>
+      <div
+        onClick={() =>
+          updateExchangeCardList('user_test', 'QnccPg4UyGWyp5l7Sy68', 'picURL')
+        }
+      >
+        <p>交換</p>
       </div>
       <div>home</div>
     </div>
