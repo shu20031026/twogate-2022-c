@@ -1,58 +1,68 @@
-import React, { Component } from "react"
-import ReactDOM from "react-dom"
+import ImageList from '@mui/material/ImageList'
+import ImageListItem from '@mui/material/ImageListItem'
 
-
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Unstable_Grid2";
+import { styled } from '@mui/material/styles'
+import Box from '@mui/material/Box'
+import Paper from '@mui/material/Paper'
+import Grid from '@mui/material/Unstable_Grid2'
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary
-}));
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}))
 
-export default function Card(props: any) {
-    return (
-        <div>
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid container xs={8} md={8} lg={8} spacing={4} sx={{ justifyContent: 'center', m: '0 auto' }}>
-                <Grid xs={4} sx={{ flexGrow: 1 }}>
-                  <Item>
-                    <Box
-                      id="category-a"
-                      sx={{ fontSize: '12px', textTransform: 'uppercase' }}
-                    >
-                    </Box>
-                    <Box component="ul" aria-labelledby="category-a" sx={{ pl: 2, flex: 1, textAlign: 'left' }}>
-                      <p>名前</p>
-                      <p>イベント</p>
-                      <p>一言</p>
-                    </Box>
-                  </Item>
-                </Grid>
-              </Grid>
-            </Box>
-            <ImageList sx={{ width: '100%', height: 450, m: '0 auto' }} cols={3} rowHeight={164}>
-              {itemData.map((item) => (
-                <ImageListItem key={item.img}>
-                  <img
-                    src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                    srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                    alt={item.title}
-                    loading="lazy"
-                  />
-                </ImageListItem>
-              ))}
-            </ImageList>
-        </div>
-    )
+export default function Card() {
+  return (
+    <div>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid
+          container
+          xs={8}
+          md={8}
+          lg={8}
+          spacing={4}
+          sx={{ justifyContent: 'center', m: '0 auto' }}
+        >
+          <Grid xs={4} sx={{ flexGrow: 1 }}>
+            <Item>
+              <Box
+                id="category-a"
+                sx={{ fontSize: '12px', textTransform: 'uppercase' }}
+              ></Box>
+              <Box
+                component="ul"
+                aria-labelledby="category-a"
+                sx={{ pl: 2, flex: 1, textAlign: 'left' }}
+              >
+                <p>名前</p>
+                <p>イベント</p>
+                <p>一言</p>
+              </Box>
+            </Item>
+          </Grid>
+        </Grid>
+      </Box>
+      <ImageList
+        sx={{ width: '100%', height: 450, m: '0 auto' }}
+        cols={3}
+        rowHeight={164}
+      >
+        {itemData.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.title}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </div>
+  )
 }
 
 const itemData = [
@@ -104,5 +114,4 @@ const itemData = [
     img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
     title: 'Bike',
   },
-];
-
+]
